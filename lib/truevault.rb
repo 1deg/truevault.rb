@@ -99,9 +99,9 @@ module TrueVault
       self.class.get("/#{@api_ver}/accounts/#{@account_id}/vaults", options)
     end
 
-    def search_document(vault_id, search_options = {})
+    def search(vault_id, search_options = {})
       options = { search_options: search_options }.merge!(default_options_to_merge_with)
-      self.class.get("/#{@api_ver}/vaults/#{vault_id}/documents/#{document_id}", options)
+      self.class.get("/#{@api_ver}/vaults/#{vault_id}", options)
     end
 
     #####################################
