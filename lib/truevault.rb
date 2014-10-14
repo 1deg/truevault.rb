@@ -104,8 +104,9 @@ module TrueVault
     end
 
     def search(vault_id, search_options = {})
-      options = { search_option: search_options }.merge!(default_options_to_merge_with)
-      self.class.get("/#{@api_ver}/vaults/#{vault_id}", options)
+      options = { query: { search_option: hash_to_base64_json(search_options) } }
+      options.merge!(default_options_to_merge_with)
+      self.class.get("/#{@api_ver}/vaults/#{vault_id}/", options)
     end
 
     #####################################
