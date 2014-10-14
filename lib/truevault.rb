@@ -73,8 +73,9 @@ module TrueVault
     # document_id     should be a valid document ID
     # document_data   should be a Ruby Hash. Method will convert it to JSON and base64 encode as required
     def create_document(vault_id, document_data, options = {})
-      options.merge!(default_options_to_merge_with)
       options[:body] = {:document => hash_to_base64_json(document_data)}
+      options[:body][:schema_id] = options.delete(:schema_id)
+      options.merge!(default_options_to_merge_with)
       self.class.post("/#{@api_ver}/vaults/#{vault_id}/documents", options)
     end
 
@@ -89,8 +90,9 @@ module TrueVault
     end
 
     def update_document(vault_id, document_id, document_data, options = {})
-      options.merge!(default_options_to_merge_with)
       options[:body] = {:document => hash_to_base64_json(document_data)}
+      options[:body][:schema_id] = options.delete(:schema_id)
+      options.merge!(default_options_to_merge_with)
       self.class.put("/#{@api_ver}/vaults/#{vault_id}/documents/#{document_id}", options)
     end
 
