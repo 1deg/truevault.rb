@@ -100,7 +100,7 @@ module TrueVault
     end
 
     def search(vault_id, search_options = {})
-      options = { search_options: search_options }.merge!(default_options_to_merge_with)
+      options = { search_option: search_options }.merge!(default_options_to_merge_with)
       self.class.get("/#{@api_ver}/vaults/#{vault_id}", options)
     end
 
